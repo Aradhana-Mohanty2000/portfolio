@@ -1,0 +1,282 @@
+.about {
+  position: relative;
+  padding: 100px 40px;
+  overflow: hidden;
+
+  background: linear-gradient(135deg, #0f172a, #1e293b, #312e81);
+  color: white;
+}
+
+/* ========================= */
+/* 🌌 BACKGROUND EFFECTS */
+/* ========================= */
+
+/* floating glow blobs */
+.about::before,
+.about::after {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+
+  filter: blur(120px);
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.about::before {
+  background: #9333ea;
+  top: 10%;
+  left: -100px;
+  animation: moveGlow 8s infinite alternate ease-in-out;
+}
+
+.about::after {
+  background: #6366f1;
+  bottom: 10%;
+  right: -100px;
+  animation: moveGlow 10s infinite alternate ease-in-out;
+}
+
+@keyframes moveGlow {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-40px); }
+}
+
+/* ========================= */
+/* LAYOUT */
+/* ========================= */
+
+.about-wrapper {
+  position: relative;
+  z-index: 1;
+
+  max-width: 1200px;
+  margin: auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 80px;
+  flex-wrap: wrap;
+}
+
+/* ========================= */
+/* LEFT SIDE */
+/* ========================= */
+
+.about-left {
+  flex: 1;
+  max-width: 550px;
+
+  animation: fadeSlideLeft 1s ease forwards;
+}
+
+/* 🔥 GRADIENT ANIMATED TEXT */
+.about-left h1 {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.2;
+
+  background: linear-gradient(
+    270deg,
+    #ffffff,
+    #a855f7,
+    #6366f1,
+    #ffffff
+  );
+  background-size: 300% 300%;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: gradientMove 6s ease infinite;
+}
+
+/* gradient animation */
+@keyframes gradientMove {
+  0% { background-position: 0% }
+  50% { background-position: 100% }
+  100% { background-position: 0% }
+}
+
+/* TEXT */
+.about-left p {
+  margin-top: 20px;
+  color: #cbd5f5;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* ========================= */
+/* STATS */
+/* ========================= */
+
+.about-stats {
+  display: flex;
+  gap: 50px;
+  margin-top: 35px;
+}
+
+.about-stats div {
+  transition: 0.3s;
+}
+
+.about-stats div:hover {
+  transform: translateY(-5px) scale(1.05);
+}
+
+.about-stats h3 {
+  font-size: 28px;
+  color: #a855f7;
+}
+
+.about-stats span {
+  font-size: 14px;
+  color: #cbd5f5;
+}
+
+/* ========================= */
+/* RIGHT SIDE */
+/* ========================= */
+
+.about-right {
+  flex: 1;
+  max-width: 450px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  animation: fadeSlideRight 1s ease forwards;
+}
+
+/* AVATAR */
+.avatar-box {
+  padding: 12px;
+  border-radius: 20px;
+
+  background: linear-gradient(135deg, #9333ea, #6366f1);
+
+  box-shadow:
+    0 0 40px rgba(147, 51, 234, 0.6),
+    0 0 80px rgba(99, 102, 241, 0.4);
+
+  margin-bottom: 25px;
+
+  transition: 0.4s;
+}
+
+.avatar-box:hover {
+  transform: scale(1.05) rotate(1deg);
+}
+
+.avatar-box img {
+  width: 170px;
+  border-radius: 15px;
+}
+
+/* ========================= */
+/* CARD */
+/* ========================= */
+
+.about-card {
+  width: 100%;
+  max-width: 420px;
+
+  padding: 25px;
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  transition: 0.3s;
+}
+
+.about-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(147,51,234,0.3);
+}
+
+/* ITEMS */
+.about-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 18px 0;
+
+  transition: 0.3s;
+}
+
+.about-item:hover {
+  transform: translateX(5px);
+}
+
+/* ICONS */
+.about-icon {
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, #9333ea, #6366f1);
+
+  box-shadow: 0 0 10px rgba(147,51,234,0.6);
+}
+
+/* ========================= */
+/* ENTRY ANIMATIONS */
+/* ========================= */
+
+@keyframes fadeSlideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeSlideRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ========================= */
+/* 📱 MOBILE */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+  .about {
+    padding: 80px 20px;
+  }
+
+  .about-wrapper {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .about-right {
+    align-items: center;
+  }
+
+  .about-stats {
+    justify-content: center;
+  }
+
+  .about-left h1 {
+    font-size: 30px;
+  }
+}

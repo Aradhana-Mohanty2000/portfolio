@@ -1,0 +1,89 @@
+.experience {
+  padding: 100px 40px;
+  background: linear-gradient(135deg, #020617, #1e1b4b);
+  color: white;
+  text-align: center;
+}
+
+.experience h2 {
+  font-size: 40px;
+  margin-bottom: 60px;
+  color: #a855f7;
+}
+
+/* CARD */
+.exp-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+  padding: 30px;
+
+  margin: 30px auto;
+  max-width: 1000px;
+
+  border-radius: 25px;
+
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(15px);
+
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: 0.3s;
+}
+
+/* Hover */
+.exp-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 50px rgba(147,51,234,0.3);
+}
+
+/* LEFT LOGO */
+.exp-left img {
+  width: 70px;
+  border-radius: 50%;
+}
+
+/* CENTER */
+.exp-center {
+  flex: 1;
+  text-align: center;
+}
+
+.exp-center h3 {
+  font-size: 22px;
+}
+
+.company {
+  color: #a855f7;
+  margin-top: 5px;
+}
+
+.date {
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+/* RIGHT CERTIFICATE */
+.exp-right img {
+  width: 160px;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.exp-right img:hover {
+  transform: scale(1.05);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .exp-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .exp-right img {
+    width: 100%;
+    max-width: 250px;
+  }
+}

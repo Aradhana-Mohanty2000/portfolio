@@ -1,0 +1,145 @@
+.education {
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #020617, #1e1b4b);
+  color: white;
+  text-align: center;
+}
+
+.education h2 {
+  font-size: 38px;
+  margin-bottom: 60px;
+  color: #a855f7;
+}
+
+/* Timeline container */
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+/* CENTER LINE */
+.timeline::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  background: rgba(255,255,255,0.15);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+}
+
+/* Card */
+.edu-card {
+  position: relative;
+  width: 45%;
+  padding: 25px;
+
+  border-radius: 20px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1);
+
+  transition: all 0.4s ease;
+
+  /* ✅ FIX: make visible by default */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover */
+.edu-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(147,51,234,0.4);
+}
+
+/* LEFT / RIGHT */
+.left {
+  align-self: flex-start;
+}
+
+.right {
+  align-self: flex-end;
+}
+
+
+/* TEXT */
+.edu-card h3 {
+  font-size: 20px;
+}
+
+.year {
+  display: block;
+  margin: 10px 0;
+  color: #a855f7;
+}
+
+.edu-card p {
+  color: #cbd5f5;
+}
+
+/* ========================= */
+/* 📱 MOBILE */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+  .education {
+    padding: 80px 15px;
+  }
+
+  .education h2 {
+    font-size: 28px;
+  }
+
+  .timeline::before {
+    left: 20px;
+  }
+
+  .edu-card {
+    width: 100%;
+    align-self: flex-start;
+    margin-left: 40px;
+  }
+
+  .left,
+  .right {
+    align-self: flex-start;
+  }
+
+  .edu-card::before {
+    left: -28px;
+    right: auto;
+  }
+
+  .edu-card h3 {
+    font-size: 18px;
+  }
+
+  .edu-card p {
+    font-size: 14px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .edu-card {
+    width: 80%;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .education h2 {
+    font-size: 24px;
+  }
+
+  .edu-card {
+    padding: 18px;
+  }
+}

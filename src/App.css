@@ -6,7 +6,9 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+body{
+  overflow:hidden;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -35,4 +37,54 @@
   to {
     transform: rotate(360deg);
   }
+}
+.bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-size: 120px;
+  font-weight: 800;
+
+  color: rgba(255,255,255,0.03);
+  white-space: nowrap;
+  pointer-events: none;
+
+  animation: moveText 20s linear infinite;
+}
+
+@keyframes moveText {
+  0% { transform: translate(-50%, -50%) translateX(0); }
+  100% { transform: translate(-50%, -50%) translateX(-200px); }
+}
+.projects-scroll {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.projects-track {
+  display: inline-flex;
+  gap: 30px;
+  animation: scroll 20s linear infinite;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.glass {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+}
+.glass {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+}
+.about, .projects, .experience {
+  position: relative;
+  overflow: hidden;
 }
