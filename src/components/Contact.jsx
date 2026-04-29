@@ -19,7 +19,7 @@ function Contact() {
 
       if (day === 0 || day === 6) {
         setStatus("closed");
-      } else if (hour >= 9 && hour < 22) {
+      } else if (hour >= 9 && hour < 23) {
         setStatus("open");
       } else {
         setStatus("closed");
@@ -33,7 +33,7 @@ function Contact() {
     e.preventDefault();
 
     if (status === "closed") {
-      alert("Currently unavailable. Please contact between 9 AM – 10 PM (Mon–Fri)");
+      alert("Currently unavailable. Please contact between 9 AM – 11 PM (Mon–Fri)");
       return;
     }
 
