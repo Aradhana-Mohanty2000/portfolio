@@ -45,21 +45,20 @@ app.post("/contact", async (req, res) => {
     await newMessage.save();
     console.log("✅ Message saved to DB");
 
-    /* 2. Send Email — separate try/catch so DB save still works */
-    try {
-      await transporter.sendMail({
-        from: process.env.EMAIL_USER,
-        to: process.env.EMAIL_USER,
-        subject: "New Contact Message",
-        text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-      });
-      console.log("✅ Email sent");
-    } catch (emailErr) {
-      console.error("❌ Email failed:", emailErr.message);
-      // Still return success since message was saved
-    }
-
+    /* 2. Respond immediately — don't wait for email */
     res.status(200).json({ success: true });
+
+    /* 3. Send email in background after response */
+    transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER,
+      subject: "New Contact Message",
+      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+    }).then(() => {
+      console.log("✅ Email sent");
+    }).catch((emailErr) => {
+      console.error("❌ Email failed:", emailErr.message);
+    });
 
   } catch (err) {
     console.error("❌ Route error:", err.message);
