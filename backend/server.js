@@ -26,13 +26,18 @@ mongoose
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.log("❌ DB Error:", err));
 
-/* ✅ Mail Transport */
+/* ✅ Mail Transport — using port 587 with STARTTLS */
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false, // STARTTLS
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+  tls: {
+    rejectUnauthorized: false
+  }
 });
 
 /* ✅ CONTACT ROUTE */
@@ -45,10 +50,10 @@ app.post("/contact", async (req, res) => {
     await newMessage.save();
     console.log("✅ Message saved to DB");
 
-    /* 2. Respond immediately — don't wait for email */
+    /* 2. Respond immediately */
     res.status(200).json({ success: true });
 
-    /* 3. Send email in background after response */
+    /* 3. Send email in background */
     transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
