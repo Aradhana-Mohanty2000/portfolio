@@ -7,7 +7,7 @@ const nodemailer = require("nodemailer");
 const Message = require("./models/Message");
 const app = express();
 
-// ✅ CORS — allow all Vercel URLs
+// ✅ CORS
 app.use(cors({
   origin: [
     "https://aradhana-mohanty-fvo03sq7gi.vercel.app",
@@ -40,21 +40,30 @@ app.post("/contact", async (req, res) => {
   try {
     const { name, email, message } = req.body;
 
+    /* 1. Save to DB */
     const newMessage = new Message({ name, email, message });
     await newMessage.save();
+    console.log("✅ Message saved to DB");
 
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: "New Contact Message",
-      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-    });
+    /* 2. Send Email — separate try/catch so DB save still works */
+    try {
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_USER,
+        subject: "New Contact Message",
+        text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+      });
+      console.log("✅ Email sent");
+    } catch (emailErr) {
+      console.error("❌ Email failed:", emailErr.message);
+      // Still return success since message was saved
+    }
 
     res.status(200).json({ success: true });
 
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false });
+    console.error("❌ Route error:", err.message);
+    res.status(500).json({ success: false, error: err.message });
   }
 });
 
