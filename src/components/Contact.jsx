@@ -19,7 +19,7 @@ function Contact() {
 
       if (day === 0 || day === 6) {
         setStatus("closed");
-      } else if (hour >= 9 && hour < 23) {
+      } else if (hour >= 9 && hour < 22) {
         setStatus("open");
       } else {
         setStatus("closed");
@@ -33,7 +33,7 @@ function Contact() {
     e.preventDefault();
 
     if (status === "closed") {
-      alert("Currently unavailable. Please contact between 9 AM – 11 PM (Mon–Fri)");
+      alert("Currently unavailable. Please contact between 9 AM – 10 PM (Mon–Fri)");
       return;
     }
 
@@ -67,7 +67,7 @@ function Contact() {
       <p className={`status ${status}`}>
         {status === "open"
           ? "🟢 Available Now"
-          : "🔴 Closed (9AM–11PM | Mon–Fri)"}
+          : "🔴 Closed (9AM–10PM | Mon–Fri)"}
       </p>
 
       <div className="contact-container">
