@@ -46,7 +46,6 @@ function Contact() {
     try {
       setLoading(true);
 
-      // ✅ Railway backend URL
       const res = await fetch("https://portfolio-production-69fa.up.railway.app/contact", {
         method: "POST",
         headers: {

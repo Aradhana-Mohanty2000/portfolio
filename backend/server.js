@@ -7,9 +7,15 @@ const nodemailer = require("nodemailer");
 const Message = require("./models/Message");
 const app = express();
 
-// ✅ CORS — allow your Vercel frontend
+// ✅ CORS — allow all Vercel URLs
 app.use(cors({
-  origin: "https://portfolio-seven-gray-fvo03sq7gi.vercel.app"
+  origin: [
+    "https://aradhana-mohanty-fvo03sq7gi.vercel.app",
+    "https://portfolio-seven-gray-fvo03sq7gi.vercel.app",
+    "https://portfolio-5etho065i-aradhana-mohanty2000s-projects.vercel.app"
+  ],
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"]
 }));
 
 app.use(express.json());
@@ -20,7 +26,7 @@ mongoose
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.log("❌ DB Error:", err));
 
-/* ✅ Mail Transport — defined BEFORE routes */
+/* ✅ Mail Transport */
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -29,16 +35,14 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-/* ✅ CONTACT ROUTE — single clean definition */
+/* ✅ CONTACT ROUTE */
 app.post("/contact", async (req, res) => {
   try {
     const { name, email, message } = req.body;
 
-    /* 1. Save to DB */
     const newMessage = new Message({ name, email, message });
     await newMessage.save();
 
-    /* 2. Send Email */
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
@@ -55,7 +59,7 @@ app.post("/contact", async (req, res) => {
 });
 
 /* ✅ SERVER START */
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
