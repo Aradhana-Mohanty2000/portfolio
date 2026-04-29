@@ -67,7 +67,7 @@ function Contact() {
       <p className={`status ${status}`}>
         {status === "open"
           ? "🟢 Available Now"
-          : "🔴 Closed (9AM–10PM | Mon–Fri)"}
+          : "🔴 Closed (9AM–11PM | Mon–Fri)"}
       </p>
 
       <div className="contact-container">
