@@ -1,70 +1,154 @@
-# Getting Started with Create React App
+# 🌐 Aradhana Mohanty — Developer Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack personal portfolio website built with **React.js** (frontend) and **Node.js + Express** (backend), featuring a live contact form with MongoDB storage and Gmail email notifications.
 
-## Available Scripts
+🔗 **Live Site:** [portfolio-seven-gray-fvo03sq7gi.vercel.app](https://portfolio-seven-gray-fvo03sq7gi.vercel.app)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## ✨ Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 🎨 Glassmorphism UI with smooth animations
+- 🌀 Auto-scrolling projects section
+- 📋 Skills, Education & Experience sections
+- 📬 Contact form with real-time availability status
+- 🕒 Live clock with open/closed hours indicator
+- 💾 Messages saved to MongoDB Atlas
+- 📧 Email notifications via Gmail (Nodemailer)
+- 📱 Fully responsive design
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🛠️ Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Frontend
+| Tech | Usage |
+|------|-------|
+| React.js | UI Framework |
+| CSS3 | Animations & Glassmorphism |
+| React Icons | Icon Library |
+| Vercel | Deployment |
 
-### `npm run build`
+### Backend
+| Tech | Usage |
+|------|-------|
+| Node.js | Runtime |
+| Express.js | Server Framework |
+| MongoDB Atlas | Database |
+| Mongoose | ODM |
+| Nodemailer | Email Service |
+| Railway | Deployment |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 📁 Project Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+portfolio/
+├── src/
+│   ├── components/
+│   │   ├── Navbar.js
+│   │   ├── Hero.js
+│   │   ├── About.js
+│   │   ├── Skills.js
+│   │   ├── Education.js
+│   │   ├── Experience.js
+│   │   ├── Projects.js
+│   │   └── Contact.js
+│   ├── styles/
+│   │   └── main.css
+│   ├── assets/
+│   ├── App.js
+│   └── index.js
+├── backend/
+│   ├── models/
+│   │   └── Message.js
+│   ├── server.js
+│   ├── package.json
+│   └── nixpacks.toml
+├── public/
+└── package.json
+```
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🚀 Getting Started Locally
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 1. Clone the repository
+```bash
+git clone https://github.com/Aradhana-Mohanty2000/portfolio.git
+cd portfolio
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 2. Install frontend dependencies
+```bash
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 3. Install backend dependencies
+```bash
+cd backend
+npm install
+```
 
-## Learn More
+### 4. Set up environment variables
+Create a `.env` file inside the `backend/` folder:
+```env
+MONGO_URI=your_mongodb_connection_string
+EMAIL_USER=your_gmail@gmail.com
+EMAIL_PASS=your_gmail_app_password
+PORT=5000
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 5. Run the backend
+```bash
+cd backend
+node server.js
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 6. Run the frontend
+```bash
+# In the root portfolio/ folder
+npm start
+```
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🌍 Deployment
 
-### Analyzing the Bundle Size
+| Service | Platform | URL |
+|---------|----------|-----|
+| Frontend | Vercel | [Live Link](https://portfolio-seven-gray-fvo03sq7gi.vercel.app) |
+| Backend | Railway | [portfolio-production-69fa.up.railway.app](https://portfolio-production-69fa.up.railway.app) |
+| Database | MongoDB Atlas | Cloud Hosted |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 📬 Contact Form Setup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The contact form uses:
+- **MongoDB Atlas** to store messages
+- **Gmail App Password** for sending email notifications
+- **Open hours:** Monday–Friday, 9 AM – 10 PM
 
-### Advanced Configuration
+To generate a Gmail App Password:
+1. Enable 2-Step Verification on your Google Account
+2. Go to **Security → App Passwords**
+3. Generate a password and add it to `.env` as `EMAIL_PASS`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 👩‍💻 Author
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+**Aradhana Mohanty**  
+Full Stack & Cloud Development Enthusiast
 
-### `npm run build` fails to minify
+[![GitHub](https://img.shields.io/badge/GitHub-Aradhana--Mohanty2000-black?logo=github)](https://github.com/Aradhana-Mohanty2000)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Aradhana%20Mohanty-blue?logo=linkedin)](https://www.linkedin.com/in/aradhana-mohanty-96a635214/)
+[![Email](https://img.shields.io/badge/Email-aradhanamohanty247@gmail.com-red?logo=gmail)](mailto:aradhanamohanty247@gmail.com)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
