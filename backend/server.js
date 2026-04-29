@@ -3,8 +3,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
-
 const Message = require("./models/Message");
+
 const app = express();
 
 // ✅ CORS
@@ -20,13 +20,13 @@ app.use(cors({
 
 app.use(express.json());
 
-/* ✅ MongoDB Connect */
+// ✅ MongoDB Connect
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.log("❌ DB Error:", err));
 
-/* ✅ Mail Transport — using port 587 with STARTTLS */
+// ✅ Mail Transport — IPv4 forced to fix ENETUNREACH on IPv6 hosts
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
@@ -37,23 +37,24 @@ const transporter = nodemailer.createTransport({
   },
   tls: {
     rejectUnauthorized: false
-  }
+  },
+  family: 4  // ✅ Force IPv4 — fixes ENETUNREACH (2607:f8b0:... IPv6 unreachable)
 });
 
-/* ✅ CONTACT ROUTE */
+// ✅ CONTACT ROUTE
 app.post("/contact", async (req, res) => {
   try {
     const { name, email, message } = req.body;
 
-    /* 1. Save to DB */
+    // 1. Save to DB
     const newMessage = new Message({ name, email, message });
     await newMessage.save();
     console.log("✅ Message saved to DB");
 
-    /* 2. Respond immediately */
+    // 2. Respond immediately
     res.status(200).json({ success: true });
 
-    /* 3. Send email in background */
+    // 3. Send email notification in background
     transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
@@ -71,7 +72,7 @@ app.post("/contact", async (req, res) => {
   }
 });
 
-/* ✅ SERVER START */
+// ✅ SERVER START
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
