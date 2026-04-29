@@ -13,7 +13,7 @@ function Contact() {
       const now = new Date();
       setTime(now);
 
-      const day = now.getDay();   // 0 = Sunday
+      const day = now.getDay();
       const hour = now.getHours();
 
       if (day === 0 || day === 6) {
@@ -46,7 +46,8 @@ function Contact() {
     try {
       setLoading(true);
 
-      const res = await fetch("http://localhost:5000/contact", {
+      // ✅ Railway backend URL
+      const res = await fetch("https://portfolio-production-69fa.up.railway.app/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,9 +92,9 @@ function Contact() {
 
         {/* LEFT */}
         <div className="contact-info">
-          <h3>Let’s Connect 💜</h3>
+          <h3>Let's Connect 💜</h3>
           <p>
-            I’m open to internships, collaborations, and exciting opportunities in 
+            I'm open to internships, collaborations, and exciting opportunities in
             Full Stack & Cloud Development.
           </p>
 
@@ -106,7 +107,6 @@ function Contact() {
               <FaLinkedin />
             </a>
 
-            {/* ✅ FIXED EMAIL */}
             <a href="mailto:aradhanamohanty247@gmail.com">
               <FaEnvelope />
             </a>
@@ -115,12 +115,11 @@ function Contact() {
 
         {/* RIGHT FORM */}
         <form className="contact-form" onSubmit={handleSubmit}>
-
           <input type="text" placeholder="Your Name" required />
           <input type="email" placeholder="Your Email" required />
           <textarea placeholder="Your Message..." rows="5" required></textarea>
 
-          <button 
+          <button
             type="submit"
             disabled={status === "closed" || loading}
           >
@@ -130,7 +129,6 @@ function Contact() {
               ? "Closed Now"
               : "Send Message"}
           </button>
-
         </form>
 
       </div>
