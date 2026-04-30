@@ -1,48 +1,57 @@
+import { useEffect, useRef } from "react";
 import './Education.css';
-import { FaGraduationCap } from "react-icons/fa";
 
 function Education() {
+  const refs = [useRef(), useRef(), useRef()];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1 }
+    );
+    refs.forEach((r) => r.current && observer.observe(r.current));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="education" id="education">
-      <h2>Education</h2>
+      <div className="education-inner">
 
-      <div className="timeline">
-
-        {/* MCA */}
-        <div className="edu-card left">
-          <div className="edu-header">
-            <FaGraduationCap className="edu-icon" />
-            <h3>MCA (Master of Computer Applications)</h3>
-          </div>
-
-          <span className="year">2024 – Present</span>
-          <p>SILICON UNIVERSITY Bhubaneswar</p>
-          <p>Specializing in Cloud & Full Stack Development</p>
+        <div className="edu-header reveal" ref={refs[0]}>
+          <p className="section-label">Academic Journey</p>
+          <h2 className="section-title">My <span>Education</span></h2>
         </div>
 
-        {/* Bachelor */}
-        <div className="edu-card right">
-          <div className="edu-header">
-            <FaGraduationCap className="edu-icon" />
-            <h3>Bachelor's Degree</h3>
+        <div className="timeline">
+
+          {/* ── MCA ── */}
+          <div className="edu-item reveal" ref={refs[1]}>
+            <div className="edu-content">
+              <span className="edu-year">2024 – Present</span>
+              <h3>Master of Computer Applications (MCA)</h3>
+              <p>Silicon University, Bhubaneswar</p>
+              <p>Specializing in Cloud &amp; Full Stack Development</p>
+            </div>
+            <div className="edu-node">🎓</div>
+            <div className="edu-empty" />
           </div>
 
-          <span className="year">2021 – 2024</span>
-          <p>BSc Information Technology & Management</p>
-          <p>Buxi Jagabandhu Autonomous College</p>
-        </div>
+          {/* ── BSc ── */}
+          <div className="edu-item reveal" ref={refs[2]}>
+            <div className="edu-empty" />
+            <div className="edu-node">🎓</div>
+            <div className="edu-content">
+              <span className="edu-year">2021 – 2024</span>
+              <h3>BSc Information Technology &amp; Management</h3>
+              <p>Buxi Jagabandhu Autonomous College</p>
+              <p>Core foundations in IT, programming &amp; systems</p>
+            </div>
+          </div>
 
+        </div>
       </div>
     </section>
   );
 }
 
 export default Education;
-// function Education() {
-//   return (
-//     <section style={{ padding: "100px", color: "white" }}>
-//       <h1>HELLO EDUCATION</h1>
-//     </section>
-//   );
-// }
-// export default Education;

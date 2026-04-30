@@ -1,83 +1,175 @@
 .hero {
-  height: 100vh;
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-}
-
-/* Overlay */
-.overlay {
-  width: 100%;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* Content */
-.hero-content {
+  padding: 130px 48px 100px;
   text-align: center;
-  color: white;
-  max-width: 700px;
-  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
 }
 
-/* Name */
-.hero-content h1 {
-  font-size: 60px;
-  font-weight: bold;
-  text-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
-  letter-spacing: 2px;
+.hero-content {
+  max-width: 820px;
+  position: relative;
+  z-index: 1;
 }
 
-/* Typing text */
-.hero-content h2 {
-  margin-top: 10px;
-  font-size: 24px;
-  color: #c084fc;
+/* ── Badge ── */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  border-radius: 100px;
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  background: rgba(139, 92, 246, 0.1);
+  font-size: 13px;
+  color: #c4b5fd;
+  margin-bottom: 28px;
+  letter-spacing: 0.5px;
 }
 
-/* Description */
-.hero-content p {
-  margin-top: 15px;
-  font-size: 16px;
-  color: #d1d5db;
+.hero-badge .pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #8b5cf6;
+  animation: heroPulse 2s ease infinite;
 }
 
-/* Buttons */
-.buttons {
-  margin-top: 30px;
+@keyframes heroPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(1.5); }
+}
+
+/* ── Name ── */
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(44px, 7vw, 84px);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -2.5px;
+  margin-bottom: 14px;
+  background: linear-gradient(135deg, #ffffff 30%, #c4b5fd 65%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Typing row ── */
+.hero-roles {
+  font-size: clamp(18px, 2.5vw, 26px);
+  color: #94a3b8;
+  font-weight: 300;
+  margin-bottom: 24px;
+  min-height: 38px;
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 2px;
+}
+
+.hero-roles .typed {
+  color: #22d3ee;
+  font-weight: 500;
+}
+
+.hero-roles .cursor {
+  color: #8b5cf6;
+  font-weight: 300;
+  animation: blink 0.9s step-start infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* ── Sub text ── */
+.hero p {
+  font-size: 17px;
+  color: #94a3b8;
+  max-width: 540px;
+  margin: 0 auto 40px;
+  line-height: 1.75;
+}
+
+/* ── CTA buttons ── */
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
-/* Primary */
-.btn {
-  padding: 12px 28px;
-  background: linear-gradient(135deg, #9333ea, #6366f1);
-  border-radius: 30px;
+.btn-primary {
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  border-radius: 12px;
   color: white;
   text-decoration: none;
-  transition: 0.3s;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
 }
 
-.btn:hover {
-  transform: scale(1.05);
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 50px rgba(139, 92, 246, 0.55);
 }
 
-/* Outline */
-.btn-outline {
-  padding: 12px 28px;
-  border: 1px solid white;
-  border-radius: 30px;
-  color: white;
+.btn-ghost {
+  padding: 14px 32px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  color: #f1f5f9;
   text-decoration: none;
-  transition: 0.3s;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s;
+  background: rgba(255, 255, 255, 0.04);
 }
 
-.btn-outline:hover {
-  background: white;
-  color: black;
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
+}
+
+/* ── Scroll hint ── */
+.hero-scroll {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: #475569;
+  animation: scrollBounce 2.2s ease infinite;
+}
+
+.hero-scroll span {
+  font-size: 11px;
+  letter-spacing: 2.5px;
+}
+
+.hero-scroll .arrow {
+  font-size: 18px;
+  letter-spacing: normal;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(7px); }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 110px 24px 80px;
+  }
 }

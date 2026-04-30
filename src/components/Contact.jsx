@@ -1,112 +1,143 @@
-import './Contact.css';
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import './Contact.css';
 
 function Contact() {
+  const leftRef  = useRef();
+  const rightRef = useRef();
+  const formRef  = useRef();
 
-  const [time, setTime] = useState(new Date());
-  const [status, setStatus] = useState("open");
+  const [time, setTime]       = useState(new Date());
+  const [isOpen, setIsOpen]   = useState(false);
   const [loading, setLoading] = useState(false);
-  const formRef = useRef();
+  const [sent, setSent]       = useState(false);
 
+  /* Clock & availability */
   useEffect(() => {
-    const interval = setInterval(() => {
-      const now = new Date();
-      setTime(now);
-      const day = now.getDay();
+    const tick = () => {
+      const now  = new Date();
+      const day  = now.getDay();
       const hour = now.getHours();
+      setTime(now);
+      setIsOpen(day >= 1 && day <= 5 && hour >= 9 && hour < 22);
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
 
-      if (day === 0 || day === 6) {
-        setStatus("closed");
-      } else if (hour >= 9 && hour < 22) {
-        setStatus("open");
-      } else {
-        setStatus("closed");
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
+  /* Scroll reveal */
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1 }
+    );
+    if (leftRef.current)  observer.observe(leftRef.current);
+    if (rightRef.current) observer.observe(rightRef.current);
+    return () => observer.disconnect();
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (status === "closed") {
-      alert("Currently unavailable. Please contact between 9 AM – 10 PM (Mon–Fri)");
-      return;
-    }
+    if (!isOpen) { alert('Currently unavailable. Please contact between 9 AM – 10 PM (Mon–Fri)'); return; }
 
     try {
       setLoading(true);
-
       await emailjs.sendForm(
-        "service_3m3a45u",
-        "template_fwb6kf9",
+        'service_3m3a45u',
+        'template_fwb6kf9',
         formRef.current,
-        "VU5_G5mcBg7m4AZuN"
+        'VU5_G5mcBg7m4AZuN'
       );
-
-      alert("Message sent successfully ✅");
+      setSent(true);
       formRef.current.reset();
-
+      setTimeout(() => setSent(false), 3000);
     } catch (err) {
       console.error(err);
-      alert("Failed to send ❌");
+      alert('Failed to send ❌ Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
+  const timeStr = time.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
   return (
     <section className="contact" id="contact">
-      <h2 className="contact-title">Contact Me</h2>
+      <div className="contact-inner">
 
-      <p className="live-clock">🕒 {time.toLocaleTimeString()}</p>
+        {/* ── Left ── */}
+        <div className="reveal" ref={leftRef}>
+          <div className="contact-header">
+            <p className="section-label">Get In Touch</p>
+            <h2 className="section-title">Let's <span>Connect</span></h2>
+          </div>
 
-      <p className={`status ${status}`}>
-        {status === "open"
-          ? "🟢 Available Now"
-          : "🔴 Closed (9AM–10PM | Mon–Fri)"}
-      </p>
+          <p className="live-time">🕒 {timeStr} IST</p>
 
-      <div className="contact-container">
+          <div className="contact-availability">
+            <div className={`avail-dot${isOpen ? '' : ' closed'}`} />
+            <span>
+              {isOpen
+                ? 'Available now — Mon to Fri, 9 AM – 10 PM IST'
+                : 'Unavailable right now (Mon–Fri, 9 AM–10 PM IST)'}
+            </span>
+          </div>
 
-        <div className="contact-info">
-          <h3>Let's Connect 💜</h3>
-          <p>
-            I'm open to internships, collaborations, and exciting opportunities in
-            Full Stack & Cloud Development.
+          <p className="contact-desc">
+            I'm open to internships, collaborations, and exciting opportunities
+            in Full Stack &amp; Cloud Development. Let's build something great together.
           </p>
+
           <div className="social-links">
-            <a href="https://github.com/Aradhana-Mohanty2000" target="_blank" rel="noreferrer">
+            <a href="https://github.com/Aradhana-Mohanty2000" target="_blank" rel="noreferrer" className="social-link" title="GitHub">
               <FaGithub />
             </a>
-            <a href="https://www.linkedin.com/in/aradhana-mohanty-96a635214/" target="_blank" rel="noreferrer">
+            <a href="https://www.linkedin.com/in/aradhana-mohanty-96a635214/" target="_blank" rel="noreferrer" className="social-link" title="LinkedIn">
               <FaLinkedin />
             </a>
-            <a href="mailto:aradhanamohanty247@gmail.com">
+            <a href="mailto:aradhanamohanty247@gmail.com" className="social-link" title="Email">
               <FaEnvelope />
             </a>
           </div>
         </div>
 
-        <form ref={formRef} className="contact-form" onSubmit={handleSubmit}>
-          <input type="text"  name="name"    placeholder="Your Name"       required />
-          <input type="email" name="email"   placeholder="Your Email"      required />
-          <textarea           name="message" placeholder="Your Message..." rows="5" required></textarea>
+        {/* ── Right: Form ── */}
+        <div className="reveal" ref={rightRef}>
+          <form className="contact-form" ref={formRef} onSubmit={handleSubmit}>
 
-          <button
-            type="submit"
-            disabled={status === "closed" || loading}
-          >
-            {loading
-              ? "Sending..."
-              : status === "closed"
-              ? "Closed Now"
-              : "Send Message"}
-          </button>
-        </form>
+            <div className="form-group">
+              <label htmlFor="name">Your Name</label>
+              <input id="name" type="text" name="name"required />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="email">Email Address</label>
+              <input id="email" type="email" name="email" required />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="message">Message</label>
+              <textarea id="message" name="message" placeholder="What's on your mind?" required />
+            </div>
+
+            <button
+              type="submit"
+              className="submit-btn"
+              disabled={!isOpen || loading}
+            >
+              {sent
+                ? '✅ Message Sent!'
+                : loading
+                ? 'Sending...'
+                : !isOpen
+                ? 'Closed Right Now'
+                : 'Send Message →'}
+            </button>
+
+          </form>
+        </div>
 
       </div>
     </section>

@@ -1,56 +1,76 @@
+import { useEffect, useRef } from "react";
 import './Experience.css';
-import cert1 from '../assets/cert1.jpg';  
-import cert2 from '../assets/cert2.jpg';  
-import logo from '../assets/itw.jpg';
-import logo2 from '../assets/ibm.jpg' 
+
+/* ── swap to img src if you have the logos ── */
+import logo  from '../assets/itw.jpg';
+import logo2 from '../assets/ibm.jpg';
+
+const EXPERIENCES = [
+  {
+    logo,
+    logoFallback: 'ITW',
+    title: 'Cloud & Azure Internship',
+    company: 'Ingenious Tech World · Silicon University, Bhubaneswar',
+    date: 'June 2025 – July 2025',
+    badge: '🏅 Certificate Earned',
+  },
+  {
+    logo: logo2,
+    logoFallback: 'IBM',
+    title: 'Data Science 101',
+    company: 'IBM Developer Skill Network',
+    date: '2025',
+    badge: '🏅 Certificate Earned',
+  },
+];
 
 function Experience() {
+  const headerRef = useRef();
+  const cardRefs  = useRef([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1 }
+    );
+    if (headerRef.current) observer.observe(headerRef.current);
+    cardRefs.current.forEach((r) => r && observer.observe(r));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="experience" id="experience">
+      <div className="experience-inner">
 
-      <h2>Work Experience</h2>
-
-      {/* CARD 1 */}
-      <div className="exp-card">
-
-        {/* LEFT LOGO */}
-        <div className="exp-left">
-          <img src={logo} alt="company" />
+        <div className="experience-header reveal" ref={headerRef}>
+          <p className="section-label">Work History</p>
+          <h2 className="section-title">Experience &amp; <span>Certifications</span></h2>
         </div>
 
-        {/* CENTER TEXT */}
-        <div className="exp-center">
-          <h3>Cloud & Azure Internship</h3>
-          <p className="company">Ingenious Tech World, Silicon University, Bhubaneswar</p>
-          <span className="date">June 2025 – July 2025</span>
-        </div>
-
-        {/* RIGHT CERTIFICATE */}
-        <div className="exp-right">
-          <img src={cert1} alt="certificate" />
-        </div>
-
-      </div>
-
-      {/* CARD 2 */}
-      <div className="exp-card">
-
-        <div className="exp-left">
-          <img src={logo2} alt="company" />
-        </div>
-
-        <div className="exp-center">
-          <h3>Data Science 101</h3>
-          <p className="company">IBM Developer Skill Network</p>
-          <span className="date">2025</span>
-        </div>
-
-        <div className="exp-right">
-          <img src={cert2} alt="certificate" />
+        <div className="exp-grid">
+          {EXPERIENCES.map((exp, i) => (
+            <div
+              className="exp-card reveal"
+              key={i}
+              ref={(el) => (cardRefs.current[i] = el)}
+            >
+              <div className="exp-logo">
+                {exp.logo
+                  ? <img src={exp.logo} alt={exp.logoFallback} />
+                  : <span className="exp-logo-text">{exp.logoFallback}</span>
+                }
+              </div>
+              <div className="exp-body">
+                <h3>{exp.title}</h3>
+                <p className="exp-company">{exp.company}</p>
+                <p className="exp-date">{exp.date}</p>
+              </div>
+              <div className="exp-badge">{exp.badge}</div>
+            </div>
+          ))}
         </div>
 
       </div>
-
     </section>
   );
 }

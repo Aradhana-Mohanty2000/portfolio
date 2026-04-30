@@ -1,66 +1,52 @@
+import { useEffect, useRef } from "react";
 import './Skills.css';
-import { FaReact, FaNodeJs, FaDatabase, FaCloud, FaMicrosoft, FaPhp, FaAws } from "react-icons/fa";
-import { SiMongodb, SiJavascript, SiMysql } from "react-icons/si";
+
+const SKILLS = [
+  { icon: '⚛️', name: 'React.js',      level: 'Frontend'     },
+  { icon: '🟢', name: 'Node.js',       level: 'Backend'      },
+  { icon: '🍃', name: 'MongoDB',       level: 'Database'     },
+  { icon: '🟨', name: 'JavaScript',    level: 'Language'     },
+  { icon: '🐘', name: 'PHP',           level: 'Backend'      },
+  { icon: '🗄️', name: 'Oracle SQL',   level: 'Database'     },
+  { icon: '🐬', name: 'MySQL',         level: 'Database'     },
+  { icon: '🔷', name: 'Azure',         level: 'Cloud'        },
+  { icon: '🟠', name: 'AWS Basics',    level: 'Cloud'        },
+  { icon: '☁️', name: 'Cloud Concepts',level: 'Architecture' },
+  { icon: '🐍', name: 'Python',        level: 'Data / Scripts'},
+  { icon: '🔧', name: 'Git / GitHub',  level: 'DevOps'       },
+];
 
 function Skills() {
+  const headerRef = useRef();
+  const gridRef   = useRef();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1 }
+    );
+    if (headerRef.current) observer.observe(headerRef.current);
+    if (gridRef.current)   observer.observe(gridRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="skills" id="skills">
-      <h2>Technical Skills</h2>
+      <div className="skills-inner">
 
-      <div className="skills-container">
-
-        {/* MERN */}
-        <div className="skill-card">
-          <FaReact className="icon" />
-          <p>React.js</p>
+        <div className="skills-header reveal" ref={headerRef}>
+          <p className="section-label">Technical Stack</p>
+          <h2 className="section-title">Skills &amp; <span>Technologies</span></h2>
         </div>
 
-        <div className="skill-card">
-          <FaNodeJs className="icon" />
-          <p>Node.js</p>
-        </div>
-
-        <div className="skill-card">
-          <SiMongodb className="icon" />
-          <p>MongoDB</p>
-        </div>
-
-        <div className="skill-card">
-          <SiJavascript className="icon" />
-          <p>JavaScript</p>
-        </div>
-
-        {/* Backend */}
-        <div className="skill-card">
-          <FaPhp className="icon" />
-          <p>PHP</p>
-        </div>
-
-        {/* Database */}
-        <div className="skill-card">
-          <FaDatabase className="icon" />
-          <p>Oracle SQL</p>
-        </div>
-
-        <div className="skill-card">
-          <SiMysql className="icon" />
-          <p>MySQL</p>
-        </div>
-
-        {/* Cloud */}
-        <div className="skill-card">
-          <FaMicrosoft className="icon" />
-          <p>Azure</p>
-        </div>
-
-        <div className="skill-card">
-          <FaAws className="icon" />
-          <p>AWS (Basics)</p>
-        </div>
-
-        <div className="skill-card">
-          <FaCloud className="icon" />
-          <p>Cloud Concepts</p>
+        <div className="skills-grid reveal" ref={gridRef}>
+          {SKILLS.map((s) => (
+            <div className="skill-card" key={s.name}>
+              <span className="skill-icon">{s.icon}</span>
+              <span className="skill-name">{s.name}</span>
+              <span className="skill-level">{s.level}</span>
+            </div>
+          ))}
         </div>
 
       </div>
