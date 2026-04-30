@@ -2,8 +2,9 @@ import './Projects.css';
 import ProjectCard from './ProjectCard';
 
 import railwayImg from '../assets/railwayde.jpg';
-import azureImg from '../assets/azurecd.jpg';   // ✅ fixed
+import azureImg from '../assets/azurecd.jpg';   
 import quickImg from '../assets/quickb.jpg';
+import studentImg from '../assets/studentms.jpg'
 
 import { useRef } from "react";
 
@@ -57,7 +58,14 @@ function Projects() {
             tags={["Pandas", "Python", "Jupyter"]}
             github="https://github.com/Aradhana-Mohanty2000/railway-data-engineering"
           />
-
+          
+          <ProjectCard
+            image={studentImg}
+            title="MarkMyWord(SMS)"
+            desc="Student management system for tracking and managing student records."
+            tags={["HTML", "CSS", "MYSQL"]}
+            github="https://github.com/Aradhana-Mohanty2000/markmywords"
+          />
         </div>
 
         {/* RIGHT BUTTON */}
