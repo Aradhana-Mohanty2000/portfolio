@@ -1,45 +1,125 @@
-*{
-    box-sizing: border-box
-}
-body {
+/* ─────────────────────────────────────────
+   MAIN.CSS  —  Aradhana Mohanty Portfolio
+   Replaces: src/styles/main.css
+───────────────────────────────────────── */
+
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap');
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: #f3f0ff;
+  padding: 0;
 }
 
-.hero {
+/* ── CSS Variables ── */
+:root {
+  --purple:      #8b5cf6;
+  --purple-dark: #6d28d9;
+  --indigo:      #6366f1;
+  --cyan:        #22d3ee;
+  --bg:          #030712;
+  --bg2:         #0d1117;
+  --surface:     rgba(255,255,255,0.04);
+  --border:      rgba(255,255,255,0.07);
+  --text:        #f1f5f9;
+  --muted:       #94a3b8;
+  --accent:      #c4b5fd;
+}
+
+/* ── Base ── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Syne', sans-serif;
+}
+
+/* ── Shared: Section labels & titles ── */
+.section-label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--purple);
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.section-title span {
+  background: linear-gradient(135deg, var(--purple), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-subtitle {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 480px;
+}
+
+/* ── Scroll-reveal animation ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: rgba(139,92,246,0.4);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139,92,246,0.7);
+}
+
+/* ── Footer ── */
+footer {
+  padding: 30px 48px;
+  border-top: 1px solid var(--border);
   text-align: center;
-  padding: 120px 20px;
-  background: linear-gradient(to right, #e0c3fc, #8ec5fc);
-  color: #2d2d2d;
+  font-size: 14px;
+  color: var(--muted);
+  background: var(--bg);
+  position: relative;
+  z-index: 1;
 }
 
-.hero h1 {
-  font-size: 42px;
-}
-
-.hero h2 {
-  margin-top: 10px;
-  color: #4b0082;
-}
-
-.hero p {
-  margin-top: 15px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.buttons {
-  margin-top: 20px;
-}
-
-button {
-  margin: 10px;
-  padding: 12px 25px;
-  border: none;
-  background: #6c63ff;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
+footer span {
+  background: linear-gradient(135deg, var(--purple), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
