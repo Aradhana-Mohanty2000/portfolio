@@ -20,7 +20,7 @@ function Contact() {
       const day  = now.getDay();
       const hour = now.getHours();
       setTime(now);
-      setIsOpen(day >= 1 && day <= 5 && hour >= 9 && hour < 22);
+      setIsOpen(hour >= 9 && hour < 22);
     };
     tick();
     const id = setInterval(tick, 1000);
@@ -40,7 +40,10 @@ function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!isOpen) { alert('Currently unavailable. Please contact between 9 AM – 10 PM (Mon–Fri)'); return; }
+   if (!isOpen) {
+  alert('Currently unavailable. Please contact between 9 AM – 10 PM IST');
+  return;
+}
 
     try {
       setLoading(true);
@@ -79,9 +82,9 @@ function Contact() {
           <div className="contact-availability">
             <div className={`avail-dot${isOpen ? '' : ' closed'}`} />
             <span>
-              {isOpen
-                ? 'Available now — Mon to Fri, 9 AM – 10 PM IST'
-                : 'Unavailable right now (Mon–Fri, 9 AM–10 PM IST)'}
+             {isOpen
+  ? 'Available now — Daily, 9 AM – 10 PM IST'
+  : 'Unavailable right now (Daily, 9 AM – 10 PM IST)'}
             </span>
           </div>
 
