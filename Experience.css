@@ -1,0 +1,143 @@
+.experience {
+  padding: 120px 48px;
+  background: #0d1117;
+  position: relative;
+  z-index: 1;
+}
+
+.experience-inner {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.experience-header {
+  margin-bottom: 56px;
+}
+
+.exp-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* ── Card ── */
+.exp-card {
+  padding: 32px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 24px;
+  align-items: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.exp-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #8b5cf6, #22d3ee);
+  border-radius: 0 2px 2px 0;
+}
+
+.exp-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 24px 50px rgba(139, 92, 246, 0.12);
+}
+
+/* ── Logo ── */
+.exp-logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #1e1b4b, #312e81);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.exp-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.exp-logo-text {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: #c4b5fd;
+}
+
+/* ── Body ── */
+.exp-body h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 6px;
+}
+
+.exp-company {
+  font-size: 14px;
+  color: #8b5cf6;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.exp-date {
+  font-size: 13px;
+  color: #475569;
+}
+
+/* ── Badge ── */
+.exp-badge {
+  padding: 8px 18px;
+  border-radius: 10px;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.22);
+  font-size: 13px;
+  color: #c4b5fd;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .experience {
+    padding: 80px 24px;
+  }
+
+  .exp-card {
+    grid-template-columns: 60px 1fr;
+    padding: 22px;
+    gap: 16px;
+  }
+
+  .exp-badge {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}

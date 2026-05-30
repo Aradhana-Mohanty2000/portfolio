@@ -1,0 +1,152 @@
+.education {
+  padding: 120px 48px;
+  background: linear-gradient(180deg, #0d1117 0%, #030712 100%);
+  position: relative;
+  z-index: 1;
+}
+
+.education-inner {
+  max-width: 900px;
+  margin: auto;
+}
+
+.edu-header {
+  margin-bottom: 60px;
+}
+
+/* ── Timeline ── */
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, #8b5cf6 0%, #22d3ee 100%);
+  transform: translateX(-50%);
+  opacity: 0.35;
+}
+
+/* ── Each row ── */
+.edu-item {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 0;
+  align-items: start;
+  margin-bottom: 56px;
+}
+
+.edu-empty {}
+
+/* Odd: card left, empty right */
+.edu-item:nth-child(odd) .edu-content  { grid-column: 1; text-align: right; padding-right: 32px; }
+.edu-item:nth-child(odd) .edu-node     { grid-column: 2; }
+.edu-item:nth-child(odd) .edu-empty    { grid-column: 3; }
+
+/* Even: empty left, card right */
+.edu-item:nth-child(even) .edu-empty   { grid-column: 1; }
+.edu-item:nth-child(even) .edu-node    { grid-column: 2; }
+.edu-item:nth-child(even) .edu-content { grid-column: 3; text-align: left; padding-left: 32px; }
+
+/* ── Node ── */
+.edu-node {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin: 0 auto;
+  z-index: 1;
+  box-shadow: 0 0 24px rgba(139, 92, 246, 0.5);
+  flex-shrink: 0;
+}
+
+/* ── Card ── */
+.edu-content {
+  padding: 24px 26px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.3s ease;
+}
+
+.edu-content:hover {
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 20px 40px rgba(139, 92, 246, 0.1);
+  transform: translateY(-4px);
+}
+
+.edu-year {
+  display: inline-block;
+  font-size: 11px;
+  color: #a78bfa;
+  font-weight: 600;
+  letter-spacing: 1px;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.edu-content h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #f1f5f9;
+  line-height: 1.3;
+}
+
+.edu-content p {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.edu-content p + p {
+  margin-top: 4px;
+}
+
+/* ── Reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .education {
+    padding: 80px 24px;
+  }
+
+  .timeline::before {
+    left: 26px;
+  }
+
+  .edu-item {
+    grid-template-columns: 52px 1fr !important;
+    grid-template-rows: auto;
+    margin-bottom: 40px;
+  }
+
+  .edu-item .edu-node    { grid-column: 1 !important; grid-row: 1; }
+  .edu-item .edu-content { grid-column: 2 !important; grid-row: 1; text-align: left !important; padding: 20px !important; }
+  .edu-item .edu-empty   { display: none !important; }
+}
