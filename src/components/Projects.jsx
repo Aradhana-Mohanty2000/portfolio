@@ -3,41 +3,47 @@ import './Projects.css';
 
 import railwayImg from '../assets/railwayde.jpg';
 import azureImg   from '../assets/azurecd.jpg';
-import quickImg   from '../assets/quickb.jpg';
 import studentImg from '../assets/studentms.jpg';
 
 const PROJECTS = [
   {
-    image: quickImg,
-    emoji: '🍔',
-    title: 'QuickBite',
-    desc: 'Full-featured food ordering platform built with the MERN stack — real-time updates, cart management, and seamless checkout.',
-    tags: ['MERN', 'MongoDB', 'React'],
-    github: 'https://github.com/Aradhana-Mohanty2000/quickbite-frontend',
-    demo: 'https://quickbite-frontend-mocha.vercel.app/',
+    emoji: '☁️',
+    image: null,
+    title: 'AWS Serverless Data Pipeline',
+    desc: 'End-to-end automated data pipeline using AWS S3, Lambda, Glue ETL, Glue Crawler, CloudWatch, SNS, and EventBridge — processes retail sales CSV/Parquet data with zero manual intervention.',
+    tags: ['AWS S3', 'AWS Glue', 'Lambda', 'EventBridge', 'SNS', 'CloudWatch'],
+    github: 'https://github.com/Aradhana-Mohanty2000',
   },
   {
+    emoji: '🚀',
+    image: null,
+    title: 'Jenkins CI/CD — React to EKS',
+    desc: 'Complete CI/CD pipeline using Jenkins on EC2 to automatically build, dockerize, and deploy a React Vite app to Amazon EKS. Every Git push triggers a new build, image push to ECR, and K8s deployment.',
+    tags: ['Jenkins', 'Docker', 'Amazon EKS', 'Kubernetes', 'ECR', 'CI/CD'],
+    github: 'https://github.com/Aradhana-Mohanty2000',
+  },
+  {
+    emoji: '🔷',
     image: azureImg,
-    emoji: '☁️',
-    title: 'Azure Cloud Deployment',
-    desc: 'Deployed a full-stack application using Azure Virtual Machines, VNets, and cloud networking infrastructure.',
-    tags: ['Azure', 'VM', 'VNet'],
+    title: 'Azure Cloud Full-Stack Deployment',
+    desc: 'Deployed a production-ready full-stack application on Microsoft Azure using VM, VNet, Load Balancer, and LAMP stack with VMSS auto-scaling and SSL/HTTPS configuration.',
+    tags: ['Azure', 'VMSS', 'Load Balancer', 'LAMP', 'SSL'],
     github: 'https://github.com/Aradhana-Mohanty2000/azure-fullstack-project',
   },
   {
-    image: railwayImg,
     emoji: '🚂',
-    title: 'Railway Data Engineering',
-    desc: 'End-to-end ETL data pipelines for railway data processing, analysis, and visualization using Python and Pandas.',
-    tags: ['Python', 'Pandas', 'Jupyter'],
+    image: railwayImg,
+    title: 'Railway Data Engineering Pipeline',
+    desc: 'End-to-end ETL data pipeline for railway dataset — data ingestion, cleaning, transformation, and analytical visualization using Python, Pandas, and Jupyter Notebook.',
+    tags: ['Python', 'Pandas', 'ETL', 'Jupyter'],
     github: 'https://github.com/Aradhana-Mohanty2000/railway-data-engineering',
   },
   {
-    image: studentImg,
     emoji: '🎓',
-    title: 'MarkMyWord (SMS)',
-    desc: 'Student management system for tracking and managing student records, marks, and profiles with a clean UI.',
-    tags: ['HTML', 'CSS', 'MySQL'],
+    image: studentImg,
+    title: 'MarkMyWord — Student Management System',
+    desc: 'Student records management system with full CRUD operations, secure MySQL database connectivity, and clean UI built using HTML, CSS, PHP, and MySQL.',
+    tags: ['HTML', 'CSS', 'PHP', 'MySQL'],
     github: 'https://github.com/Aradhana-Mohanty2000/markmywords',
   },
 ];
@@ -48,7 +54,9 @@ function Projects() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      }),
       { threshold: 0.08 }
     );
     if (headerRef.current) observer.observe(headerRef.current);
@@ -63,7 +71,9 @@ function Projects() {
         <div className="projects-header reveal" ref={headerRef}>
           <p className="section-label">Portfolio</p>
           <h2 className="section-title">Featured <span>Projects</span></h2>
-          <p className="section-subtitle">A selection of things I've built across full-stack and cloud domains.</p>
+          <p className="section-subtitle">
+            Cloud, DevOps &amp; Data Engineering projects built with real AWS and Azure infrastructure.
+          </p>
         </div>
 
         <div className="projects-grid">
@@ -83,15 +93,27 @@ function Projects() {
                 <p>{p.desc}</p>
 
                 <div className="project-tags">
-                  {p.tags.map((t) => <span className="tag" key={t}>{t}</span>)}
+                  {p.tags.map((t) => (
+                    <span className="tag" key={t}>{t}</span>
+                  ))}
                 </div>
 
                 <div className="project-links">
-                  <a href={p.github} target="_blank" rel="noreferrer" className="project-link github">
+                  <a
+                    href={p.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="project-link github"
+                  >
                     ↗ GitHub
                   </a>
                   {p.demo && (
-                    <a href={p.demo} target="_blank" rel="noreferrer" className="project-link demo">
+                    <a
+                      href={p.demo}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-link demo"
+                    >
                       ⚡ Live Demo
                     </a>
                   )}
