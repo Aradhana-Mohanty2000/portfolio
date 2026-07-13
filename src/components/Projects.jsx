@@ -4,23 +4,25 @@ import './Projects.css';
 import railwayImg from '../assets/railwayde.jpg';
 import azureImg   from '../assets/azurecd.jpg';
 import studentImg from '../assets/studentms.jpg';
+import cicdImg    from '../assets/cicd.jpg';
+import serverlessImg from '../assets/serverless.jpg';
 
 const PROJECTS = [
   {
     emoji: '☁️',
-    image: null,
+    image: serverlessImg,
     title: 'AWS Serverless Data Pipeline',
     desc: 'End-to-end automated data pipeline using AWS S3, Lambda, Glue ETL, Glue Crawler, CloudWatch, SNS, and EventBridge — processes retail sales CSV/Parquet data with zero manual intervention.',
     tags: ['AWS S3', 'AWS Glue', 'Lambda', 'EventBridge', 'SNS', 'CloudWatch'],
-    github: 'https://github.com/Aradhana-Mohanty2000',
+    github: 'https://github.com/Aradhana-Mohanty2000/AWS-Serverless-Data-Pipeline',
   },
   {
     emoji: '🚀',
-    image: null,
+    image: cicdImg,
     title: 'Jenkins CI/CD — React to EKS',
     desc: 'Complete CI/CD pipeline using Jenkins on EC2 to automatically build, dockerize, and deploy a React Vite app to Amazon EKS. Every Git push triggers a new build, image push to ECR, and K8s deployment.',
     tags: ['Jenkins', 'Docker', 'Amazon EKS', 'Kubernetes', 'ECR', 'CI/CD'],
-    github: 'https://github.com/Aradhana-Mohanty2000',
+    github: 'https://github.com/Aradhana-Mohanty2000/Jenkins-CI-CD-',
   },
   {
     emoji: '🔷',
