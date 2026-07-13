@@ -4,13 +4,13 @@ import './Projects.css';
 import railwayImg from '../assets/railwayde.jpg';
 import azureImg   from '../assets/azurecd.jpg';
 import studentImg from '../assets/studentms.jpg';
-import cicdImg    from '../assets/cicd.jpg';
-import serverlessImg from '../assets/serverless.jpg';
+import jenkinscicdImg    from '../assets/jenkins cicd.jpg';
+import awsserver from '../assets/awsserver.jpg';
 
 const PROJECTS = [
   {
     emoji: '☁️',
-    image: serverlessImg,
+    image: awsserver,
     title: 'AWS Serverless Data Pipeline',
     desc: 'End-to-end automated data pipeline using AWS S3, Lambda, Glue ETL, Glue Crawler, CloudWatch, SNS, and EventBridge — processes retail sales CSV/Parquet data with zero manual intervention.',
     tags: ['AWS S3', 'AWS Glue', 'Lambda', 'EventBridge', 'SNS', 'CloudWatch'],
@@ -18,7 +18,7 @@ const PROJECTS = [
   },
   {
     emoji: '🚀',
-    image: cicdImg,
+    image: jenkinscicdImg,
     title: 'Jenkins CI/CD — React to EKS',
     desc: 'Complete CI/CD pipeline using Jenkins on EC2 to automatically build, dockerize, and deploy a React Vite app to Amazon EKS. Every Git push triggers a new build, image push to ECR, and K8s deployment.',
     tags: ['Jenkins', 'Docker', 'Amazon EKS', 'Kubernetes', 'ECR', 'CI/CD'],
