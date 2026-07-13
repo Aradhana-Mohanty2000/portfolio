@@ -17,10 +17,10 @@ function Contact() {
   useEffect(() => {
     const tick = () => {
       const now  = new Date();
-      const day  = now.getDay();
       const hour = now.getHours();
+      const day  = now.getDay(); // eslint-disable-line no-unused-vars
       setTime(now);
-      setIsOpen(hour >= 9 && hour < 22);
+      setIsOpen(day >= 1 && day <= 5 && hour >= 9 && hour < 22);
     };
     tick();
     const id = setInterval(tick, 1000);
